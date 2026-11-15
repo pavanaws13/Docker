@@ -1,0 +1,171 @@
+# Root Cause Analysis (RCA)
+
+## Incident Summary
+
+Application: Frontend Service
+Environment: Production
+Incident Date: [02-JULY-2026]
+Incident Time: [07:00 AM IST]
+Reported By: Client
+Severity: High (Service Impact)
+Status: Resolved
+
+---
+
+# Executive Summary
+
+On [02-JULY-2026 & 07:00 AM IST], the frontend application experienced an outage due to the frontend container being terminated after exhausting its allocated memory. The service became unavailable until the container was restarted and memory utilization stabilized.
+
+The incident was caused by excessive memory consumption within the frontend container, resulting in an Out Of Memory (OOM) condition. Kubernetes/Docker automatically terminated the container after it exceeded the configured memory limit.
+
+The service has been restored, and preventive measures are being implemented to minimize recurrence.
+
+---
+
+# MOM
+
+| Time[AM IST]  | Event                                                     |
+| ----- | --------------------------------------------------------- |
+| 07:01 | Monitoring detected increased frontend memory utilization |
+| 07:02 | Memory usage reached configured limit                     |
+| 06:55 | Container entered Out Of Memory (OOM) state               |
+| 06:55 | Frontend application became unavailable                   |
+| 07:01 | Engineering team received alert                           |
+| 07:05 | Investigation initiated                                   |
+| 07:00 | Container restarted                                       |
+| 07:40 | Application became healthy                                |
+| 07:40 | Post-incident monitoring confirmed service stability      |
+
+---
+
+# Impact Analysis
+
+* Frontend application was temporarily unavailable.
+* End users experienced page loading failures and service interruptions.
+* Backend services remained operational.
+* No customer data loss or corruption occurred.
+* Total outage duration: 45 minutes
+
+---
+
+# Root Cause
+
+The frontend container exceeded its allocated memory limit due to high memory utilization. Once the configured memory threshold was reached, the container runtime invoked the Out Of Memory (OOM) Killer, terminating the process to protect the host system.
+
+Potential contributing factors include:
+
+* Increased application traffic.
+* Memory-intensive frontend processing.
+* Large static asset loading.
+* Inefficient memory management within the application.
+* Insufficient container memory allocation.
+* Absence of memory optimization for recent deployments.
+
+---
+
+# Technical Findings
+
+During investigation, the following observations were made:
+
+* Container memory utilization reached 100%.
+* OOMKilled event recorded.
+* Container restart count increased.
+* CPU utilization remained within acceptable limits.
+* No infrastructure or node-level failures observed.
+* Backend APIs remained healthy.
+* Kubernetes node had sufficient available resources.
+* Issue was isolated to the frontend container.
+
+---
+
+# Immediate Resolution
+
+The following actions were performed:
+
+* Restarted the affected frontend container.
+* Verified application health.
+* Monitored memory consumption.
+* Confirmed frontend accessibility.
+* Restored service successfully.
+
+---
+
+# Corrective Actions
+
+Immediate corrective actions:
+
+* Increased frontend container memory limit (if applicable).
+* Cleared unnecessary cached objects.
+* Validated deployment health.
+* Reviewed recent deployments.
+* Increased monitoring frequency.
+
+---
+
+# Preventive Actions
+
+To prevent recurrence, the following actions are planned:
+
+1. Perform application memory profiling.
+2. Identify and resolve potential memory leaks.
+3. Optimize frontend bundle size.
+4. Enable Horizontal Pod Autoscaling (HPA), where appropriate.
+5. Review and tune Kubernetes resource requests and limits.
+6. Configure proactive memory utilization alerts.
+7. Implement regular performance and load testing.
+8. Review garbage collection behavior (if applicable).
+9. Conduct capacity planning based on production traffic patterns.
+10. Add dashboards for container memory trend analysis.
+
+---
+
+# Root Cause Category
+
+Primary Cause: Resource Exhaustion (Memory)
+
+Secondary Cause: Container memory limit exceeded
+
+---
+
+# Detection
+
+The issue was identified through:
+
+* Infrastructure monitoring alerts
+* Kubernetes OOMKilled events
+* Application health checks
+* Client-reported service unavailability
+
+---
+
+# Lessons Learned
+
+* Existing memory thresholds require review.
+* Earlier alerting would reduce response time.
+* Periodic capacity reviews should be performed.
+* Memory profiling should be incorporated into release validation.
+
+---
+
+# Action Items
+
+| Action                         | Owner       | Priority | Target Date | Status |
+| ------------------------------ | ----------- | -------- | ----------- | ------ |
+| Analyze memory usage           | Dev Team    | High     | TBD         | Open   |
+| Review container memory limits | DevOps      | High     | TBD         | Open   |
+| Configure memory alerts        | DevOps      | High     | TBD         | Open   |
+| Perform load testing           | QA          | Medium   | TBD         | Open   |
+| Optimize frontend application  | Development | High     | TBD         | Open   |
+| Review deployment strategy     | DevOps      | Medium   | TBD         | Open   |
+
+---
+
+# Conclusion
+
+The outage occurred because the frontend container exhausted its allocated memory and was terminated by the container runtime (OOMKilled). Service was restored by restarting the container and validating application health. Long-term corrective measures are focused on application optimization, resource tuning, enhanced monitoring, and capacity planning to reduce the likelihood of recurrence.
+
+Current Status: Resolved
+
+Business Impact: Temporary frontend service interruption. No data loss observed.
+
+Next Review: After completion of preventive action items.

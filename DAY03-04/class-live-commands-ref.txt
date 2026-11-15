@@ -1,0 +1,299 @@
+  1  clear
+    2  docker
+    3  sudo apt update -y
+    4  sudo apt install docker.io
+    5  clear
+    6  sudo usermod docker -aG ubuntu
+    7  sudo usermod ubuntu -aG docker
+    8  exit
+    9  clear
+   10  docker -v
+   11  docker ps
+   12  docker ps -a
+   13  docker images
+   14  docker images i
+   15  clear
+   16  git clone https://github.com/kkdevopsb9/maven-webapplication-project-kkfunda.git
+   17  clear
+   18  ls
+   19  cd maven-webapplication-project-kkfunda/
+   20  cd ..
+   21  ls
+   22  cd maven-webapplication-project-kkfunda/
+   23  ls -lrth
+   24  mvn clean package
+   25  sudo apt install maven -y
+   26  clear
+   27  ls
+   28  mvn clean package
+   29  clear
+   30  ls -lrth
+   31  vi Dockerfile
+   32  nano Dockerfile
+   33  cat Dockerfile
+   34  clear
+   35  ls
+   36  docker build -t kkdevopsb9/webapp:1.0 .
+   37  docker images
+   38  clear
+   39  docker image
+   40  clear
+   41  docker images
+   42  docker create -p 8080:8080 --name web1 kkdevopsb9/webapp:1.0
+   43  docker ps
+   44  docker ps -a
+   45  docker start 1d594fd08ae6
+   46  docker ps
+   47  clear
+   48  docker images
+   49  cat Dockerfile
+   50  ls
+   51  cd src/
+   52  ls
+   53  cd main/
+   54  ls
+   55  cd webapp/
+   56  ls
+   57  cd jsps/
+   58  ls
+   59  vi home.jsp
+   60  cd ~
+   61  pwd
+   62  ls
+   63  cd maven-webapplication-project-kkfunda/
+   64  clear
+   65  ls -lrth
+   66  mvn clean package
+   67  clear
+   68  cat Dockerfile
+   69  docker images
+   70  docker build -t kkdevopsb9/webapp:1.1 .
+   71  docker images
+   72  docker ps
+   73  docker run -d -p 8081:8080 --name web2 kkdevopsb9/webapp:1.1
+   74  clear
+   75  docker ps
+   76  docker stop 1d594fd08ae6
+   77  docker ps
+   78  docker ps -a
+   79  docker logs 1d594fd08ae6
+   80  clear
+   81  docker ps
+   82  docker ps -a
+   83  docker start 1d594fd08ae6
+   84  docker ps -a
+   85  clear
+   86  dcoker images
+   87  docker images
+   88  docker images ls
+   89  docker image ls
+   90  docker ps
+   91  docker container ls
+   92  clear
+   93  docker ps -a
+   94  docker run -d -p 8082:8080 --name web3 kkdevopsb9/webapp:1.1
+   95  docker run -d -p 8083:8080 --name web4 kkdevopsb9/webapp:1.1
+   96  docker run -d -p 8084:8080 --name web5 kkdevopsb9/webapp:1.1
+   97  docker run -d -p 8085:8080 --name web6 kkdevopsb9/webapp:1.1
+   98  clear
+   99  docker ps
+  100  docker stop 1d594fd08ae6
+  101  docker ps -a
+  102  docker rm 1d594fd08ae6
+  103  docker ps -a
+  104  docker rm ef4ced8ec43a
+  105  docker rm -f ef4ced8ec43a
+  106  docker ps
+  107  clear
+  108  docker ps -a
+  109  docker create -p 8080:8080 --name web1 kkdevopsb9/webapp:1.0
+  110  docker start web1
+  111  docker run -d -p 8081:8080 --name web2 kkdevopsb9/webapp:1.1
+  112  clear
+  113  docker ps -a
+  114  docker stop web1
+  115  docker stop web2
+  116  docker ps -a
+  117  docker ps -aq
+  118  docker ps --filter status="exited" -aq
+  119  docker rm -f $(docker ps --filter status="exited" -aq)
+  120  docker ps -a
+  121  clear
+  122  docker ps -a
+  123  docker stop web3
+  124  clear
+  125  docker ps -a
+  126  docker ps -1
+  127  docker ps -q
+  128  docker ps -aq
+  129  docker stop $(docker ps -q)
+  130  docker ps -a
+  131  docker start $(docker ps -q)
+  132  clear
+  133  docker start $(docker ps -q)
+  134  docker ps --filter status="exited" -aq
+  135  docker ps -a
+  136  docker start web3
+  137  docker ps -a
+  138  docker ps -aq
+  139  docker ps --filter status="exited" -aq
+  140  docker start $(docker ps --filter status="exited" -aq)
+  141  docker ps -a
+  142  clear
+  143  docker ps -a
+  144  docker stop web3 web4
+  145  docker ps -a
+  146  docker container prune
+  147  docker ps -a
+  148  clear
+  149  docker images
+  150  docker ps -a
+  151  docker run -d -p 8086:8080 --name app7 kkdevopsb9/webapp:1.0
+  152  docker ps -a
+  153  docker rename app7 web7
+  154  docker ps -a
+  155  docker
+  156  clear
+  157  docker ps -a
+  158  docker stop web5
+  159  docker ps -a
+  160  docker start
+  161  docker start web5
+  162  docker ps -a
+  163  clear
+  164  docker ps -a
+  165  docker pause web7
+  166  docker pause web6
+  167  docker ps -a
+  168  docker unpause web6 web7
+  169  docker ps -a
+  170  docker pause web6 web7
+  171  clwar
+  172  clear
+  173  docker ps -a
+  174  docker ps --filter status="paused" -a
+  175  docker ps --filter status="paused" -aq
+  176  docker unpause $(docker ps --filter status="paused" -aq )
+  177  docker ps -a
+  178  clear
+  179  docker ps -a
+  180  docker images
+  181  docker rmi kkdevopsb9/webapp:1.0
+  182  docker rmi -f kkdevopsb9/webapp:1.0
+  183  docker images
+  184  docker images -a
+  185  docker images -f dangling=true
+  186  docker images -f dangling=false
+  187  docker rm -f web7
+  188  clear
+  189  docker images -a
+  190  docker images -f dangling=true
+  191  docker images -f dangling=true -q
+  192  docker image prune
+  193  docker images -a
+  194  history
+ubuntu@ip-172-31-21-95:~/maven-webapplication-project-kkfunda$
+
+
+
+
+
+  1  clear
+    2  sudo apt update -y
+    3  clear
+    4  docker
+    5  sudo apt install docker.io
+    6  clear
+    7  sudo usermod ubuntu -aG docker
+    8  exit
+    9  clear
+   10  docker images
+   11  docker ps -a
+   12  docker pull kkdevopsb9/maven-web:1.1
+   13  clear
+   14  docker images
+   15  docker run -d -p 8080:8080 --name web1 kkdevopsb9/maven-web:1.1
+   16  docker ps -a
+   17  docker run -d -p 8081:8080 kkdevopsb9/maven-web:1.1
+   18  docker ps -a
+   19  pwd
+   20  docker exec -it web1 /bin/bash
+   21  pwd
+   22  docker ps -a
+   23  docker exec web1 ls webapps
+   24  docker exec web1 ls logs
+   25  docker exec web1 cat logs/manager.2026-06-19.log
+   26  docker exec web1 cat logs/catalina.2026-06-19.log
+   27  pwd
+   28  clear
+   29  docker ps -a
+   30  docker logs web1
+   31  clear
+   32  docker ps -a
+   33  docker top web1
+   34  clear
+   35  docker stats web1
+   36  docker run --memory="500m" -d -p 8082:8080 --name web3 kkdevopsb9/maven-web:1.1
+   37  docker ps -a
+   38  docker stats web3
+   39  docker ps -a
+   40  docker stats web3
+   41  clear
+   42  docker run --memory="100m" -d -p 8083:8080 --name web4 kkdevopsb9/maven-web:1.1
+   43  docker ps -a
+   44  docker stats web4
+   45  docker ps -a
+   46  docker start web4
+   47  docker ps -a
+   48  docker logs web4
+   49  clear
+   50  docker images
+   51  clear
+   52  docker ps -a
+   53  docker inspect web4
+   54  clear
+   55  docker inspect web3
+   56  clear
+   57  docker exec web3 ls -lrth logs
+   58  pwd
+   59  docker cp web3:/usr/local/tomcat/logs/catalina.2026-06-19.log catalina.2026-06-19.log
+   60  ls -lrth
+   61  cat catalina.2026-06-19.log
+   62  clear
+   63  ls
+   64  touch tomcat.sh
+   65  ls
+   66  pwd
+   67  docker cp tomcat.sh web3:/usr/local/tomcat/
+   68  docker exec web3 ls -lrth
+   69  clear
+   70  docker ps -a
+   71  docker images
+   72  docker commit web3 kkdevopsb9/web3bkp
+   73  ls
+   74  docker images
+   75  docker rm -f web3
+   76  clear
+   77  docker images
+   78  docker ps -a
+   79  docker run -d -p 9000:8080 --name web9 kkdevopsb9/web3bkp:latest
+   80  docker ps -a
+   81  docker exec web9 ls -lrth
+   82  clear
+   83  docker ps -a
+   84  docker inspect web1
+   85  clear
+   86  docker ps -a
+   87  docker inspect --format ".State.Status" web1
+   88  docker inspect --format "{{.State.Status}}" web1
+   89  docker inspect --format "{{.State.StartedAt}},{{.State.Status}}" web1
+   90  docker inspect --format "{{.State.StartedAt}},{{.State.Status}},{{NetworkSettings.IPAddress}}" web1
+   91  docker inspect --format "{{.State.StartedAt}},{{.State.Status}},{{.NetworkSettings.IPAddress}}" web1
+   92  docker inspect --format '{{.State.StartedAt}},{{.State.Status}},{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web1
+   93  docker inspect --format '{{.State.StartedAt}},{{.State.Status}},{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
+   94  clear
+   95  docker
+   96  clear
+   97  history
+ubuntu@ip-172-31-4-17:~$
+
